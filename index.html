@@ -1,0 +1,289 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DICT - Digital Transformation Center Registration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        /* Custom scrollbar for clean look */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #e4e4e7; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #d4d4d8; }
+    </style>
+</head>
+<body class="bg-zinc-50 text-zinc-900 antialiased selection:bg-blue-100 selection:text-blue-900 h-screen overflow-hidden flex flex-col">
+
+    <!-- Top Navigation Bar -->
+    <header class="w-full bg-white border-b border-zinc-200 sticky top-0 z-50 shrink-0">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="logo.png" alt="DICT logo" class="h-9 w-9 object-contain">
+                <div>
+                    <h1 class="text-sm font-semibold tracking-tight leading-none text-zinc-900">DICT <span class="text-zinc-400 font-normal">|</span> DTC Surigao del Sur Office</h1>
+                    <p class="text-[10px] uppercase tracking-wider text-zinc-500 font-medium pt-0.5">Digital Transformation Center</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4 text-zinc-400">
+                <button class="hover:text-zinc-600 transition-colors" title="Information">
+                    <span class="iconify" data-icon="lucide:help-circle" data-width="20" data-stroke-width="1.5"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 overflow-y-auto w-full flex items-center justify-center p-4 sm:p-6">
+        
+        <!-- Registration Form Card (Centered) -->
+        <div class="w-full max-w-[480px] bg-white rounded-2xl shadow-xl shadow-zinc-200/50 border border-zinc-200/60 overflow-hidden flex flex-col max-h-[calc(100vh-6rem)]">
+            
+            <!-- Kiosk Header -->
+            <div class="p-6 border-b border-zinc-100 bg-gradient-to-b from-white to-zinc-50/50 shrink-0">
+                <div class="flex justify-between items-start mb-2">
+                    <div>
+                        <h2 class="text-2xl font-semibold tracking-tight text-zinc-900">DTC Foot Traffic</h2>
+                        <p class="text-sm text-zinc-500 mt-1">Please fill in your details to enter the center.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scrollable Form Area -->
+            <form id="registrationForm" class="flex-1 overflow-y-auto p-6 space-y-5">
+                
+                <!-- Personal Info -->
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-[11px] uppercase tracking-wider font-semibold text-zinc-500 mb-1.5">Name</label>
+                        <div class="relative group">
+                            <span class="absolute left-3 top-2.5 text-zinc-400 group-focus-within:text-blue-600 transition-colors">
+                                <span class="iconify" data-icon="lucide:user" data-width="18" data-stroke-width="1.5"></span>
+                            </span>
+                            <input type="text" id="name" name="name" placeholder="Juan Dela Cruz" required class="w-full pl-10 pr-4 py-2 text-sm bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 hover:border-zinc-300 transition-all placeholder:text-zinc-400">
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-[11px] uppercase tracking-wider font-semibold text-zinc-500 mb-1.5">City/Municipality</label>
+                            <div class="relative group">
+                                <span class="absolute left-3 top-2.5 text-zinc-400 group-focus-within:text-blue-600 transition-colors">
+                                    <span class="iconify" data-icon="lucide:map-pin" data-width="18" data-stroke-width="1.5"></span>
+                                </span>
+                                <input type="text" id="cityMunicipality" name="cityMunicipality" placeholder="Tandag City" required class="w-full pl-10 pr-4 py-2 text-sm bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 hover:border-zinc-300 transition-all placeholder:text-zinc-400">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] uppercase tracking-wider font-semibold text-zinc-500 mb-1.5">Barangay</label>
+                            <div class="relative group">
+                                <span class="absolute left-3 top-2.5 text-zinc-400 group-focus-within:text-blue-600 transition-colors">
+                                    <span class="iconify" data-icon="lucide:map" data-width="18" data-stroke-width="1.5"></span>
+                                </span>
+                                <input type="text" id="barangay" name="barangay" placeholder="Barangay Name" required class="w-full pl-10 pr-4 py-2 text-sm bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 hover:border-zinc-300 transition-all placeholder:text-zinc-400">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] uppercase tracking-wider font-semibold text-zinc-500 mb-1.5">Gender</label>
+                            <div class="relative">
+                                <select id="gender" name="gender" required class="w-full pl-3 pr-8 py-2 text-sm bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 hover:border-zinc-300 transition-all appearance-none text-zinc-700 cursor-pointer">
+                                    <option value="">Select...</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Prefer not to say">Prefer not to say</option>
+                                </select>
+                                <span class="absolute right-3 top-2.5 text-zinc-400 pointer-events-none">
+                                    <span class="iconify" data-icon="lucide:chevron-down" data-width="16" data-stroke-width="1.5"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] uppercase tracking-wider font-semibold text-zinc-500 mb-1.5">Age</label>
+                            <div class="relative group">
+                                <span class="absolute left-3 top-2.5 text-zinc-400 group-focus-within:text-blue-600 transition-colors">
+                                    <span class="iconify" data-icon="lucide:calendar" data-width="18" data-stroke-width="1.5"></span>
+                                </span>
+                                <input type="number" id="age" name="age" placeholder="25" min="1" max="120" required class="w-full pl-10 pr-4 py-2 text-sm bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 hover:border-zinc-300 transition-all placeholder:text-zinc-400">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sector & Purpose -->
+                <div class="space-y-4 pt-2">
+                    <div>
+                        <label class="block text-[11px] uppercase tracking-wider font-semibold text-zinc-500 mb-1.5">Sector</label>
+                        <div class="relative">
+                            <select id="sector" name="sector" required class="w-full pl-3 pr-8 py-2 text-sm bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 hover:border-zinc-300 transition-all appearance-none text-zinc-700 cursor-pointer">
+                                <option value="">Select...</option>
+                                <option value="Citizen">Citizen</option>
+                                <option value="Government Employee">Government Employee</option>
+                                <option value="Private Sector">Private Sector</option>
+                                <option value="Student / Academe">Student / Academe</option>
+                            </select>
+                            <span class="absolute right-3 top-2.5 text-zinc-400 pointer-events-none">
+                                <span class="iconify" data-icon="lucide:chevron-down" data-width="16" data-stroke-width="1.5"></span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] uppercase tracking-wider font-semibold text-zinc-500 mb-1.5">Service/Purpose</label>
+                        <div class="relative">
+                            <select id="servicePurpose" name="servicePurpose" required class="w-full pl-3 pr-8 py-2 text-sm bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 hover:border-zinc-300 transition-all appearance-none text-zinc-700 cursor-pointer">
+                                <option value="">Select...</option>
+                                <option value="Training">Training</option>
+                                <option value="Inquiry">Inquiry</option>
+                                <option value="Meeting">Meeting</option>
+                                <option value="Co-working">Co-working</option>
+                                <option value="Gov Application">Gov Application</option>
+                            </select>
+                            <span class="absolute right-3 top-2.5 text-zinc-400 pointer-events-none">
+                                <span class="iconify" data-icon="lucide:chevron-down" data-width="16" data-stroke-width="1.5"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Privacy -->
+                <div class="bg-blue-50/50 border border-blue-100 rounded-lg p-3 flex items-start gap-3 mt-4">
+                    <div class="relative flex items-center mt-0.5">
+                        <input type="checkbox" id="consent" name="consent" required class="peer h-4 w-4 cursor-pointer appearance-none rounded border border-zinc-300 checked:bg-blue-600 checked:border-blue-600 transition-all">
+                        <span class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white opacity-0 peer-checked:opacity-100 pointer-events-none">
+                            <span class="iconify" data-icon="lucide:check" data-width="12"></span>
+                        </span>
+                    </div>
+                    <label for="consent" class="text-xs text-zinc-600 leading-relaxed cursor-pointer select-none">
+                        I consent to the processing of my personal data in accordance with the <span class="font-medium text-blue-700 hover:underline">Data Privacy Act of 2012</span> for contact tracing and analytics purposes.
+                    </label>
+                </div>
+
+                <!-- Success/Error Messages -->
+                <div id="messageContainer" class="hidden"></div>
+            </form>
+
+            <!-- Footer Action -->
+            <div class="p-6 border-t border-zinc-100 bg-white shrink-0">
+                <button type="submit" form="registrationForm" id="submitBtn" class="group w-full bg-zinc-900 hover:bg-zinc-800 text-white font-medium py-3 rounded-lg shadow-lg shadow-zinc-900/10 flex items-center justify-center gap-2 transition-all active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed">
+                    <span id="submitText">Check In Now</span>
+                    <span id="submitIcon" class="group-hover:translate-x-1 transition-transform">
+                        <span class="iconify" data-icon="lucide:arrow-right" data-width="18" data-stroke-width="1.5"></span>
+                    </span>
+                </button>
+                <p class="text-center text-[10px] text-zinc-400 mt-3 flex items-center justify-center gap-1">
+                    <span class="iconify" data-icon="lucide:shield-check" data-width="12" data-stroke-width="1.5"></span>
+                    Secure &amp; Encrypted Submission
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // IMPORTANT: Replace this URL with your Google Apps Script Web App URL
+        // You'll get this URL after deploying your Google Apps Script (see instructions in Code.gs)
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxUwM9sr3Eccxl9V_5wV2JT9XU9-KGmVnxkRh5ZVQp8XaTC4YRKfFFkP6L7xmyaCos/exec';
+
+        const form = document.getElementById('registrationForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const submitText = document.getElementById('submitText');
+        const submitIcon = document.getElementById('submitIcon');
+        const messageContainer = document.getElementById('messageContainer');
+
+        function showMessage(message, isError = false) {
+            messageContainer.className = `p-4 rounded-lg ${isError ? 'bg-red-50 border border-red-200 text-red-700' : 'bg-emerald-50 border border-emerald-200 text-emerald-700'}`;
+            messageContainer.innerHTML = `
+                <div class="flex items-center gap-2">
+                    <span class="iconify" data-icon="${isError ? 'lucide:alert-circle' : 'lucide:check-circle'}" data-width="18"></span>
+                    <span class="text-sm font-medium">${message}</span>
+                </div>
+            `;
+            messageContainer.classList.remove('hidden');
+            
+            // Scroll to message
+            messageContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            
+            // Hide message after 5 seconds for success, keep error visible
+            if (!isError) {
+                setTimeout(() => {
+                    messageContainer.classList.add('hidden');
+                }, 5000);
+            }
+        }
+
+        function setLoading(isLoading) {
+            submitBtn.disabled = isLoading;
+            if (isLoading) {
+                submitText.textContent = 'Submitting...';
+                submitIcon.innerHTML = '<span class="iconify" data-icon="lucide:loader-2" data-width="18" data-stroke-width="1.5" class="animate-spin"></span>';
+            } else {
+                submitText.textContent = 'Check In Now';
+                submitIcon.innerHTML = '<span class="iconify" data-icon="lucide:arrow-right" data-width="18" data-stroke-width="1.5"></span>';
+            }
+        }
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Check if Google Script URL is configured
+            if (GOOGLE_SCRIPT_URL === 'YOUR_GOOGLE_SCRIPT_URL_HERE') {
+                showMessage('Please configure the Google Script URL in the code. See setup instructions.', true);
+                return;
+            }
+
+            // Validate consent checkbox
+            const consent = document.getElementById('consent').checked;
+            if (!consent) {
+                showMessage('Please provide consent to proceed.', true);
+                return;
+            }
+
+            // Collect form data
+            const formData = {
+                name: document.getElementById('name').value.trim(),
+                cityMunicipality: document.getElementById('cityMunicipality').value.trim(),
+                barangay: document.getElementById('barangay').value.trim(),
+                sector: document.getElementById('sector').value,
+                servicePurpose: document.getElementById('servicePurpose').value,
+                gender: document.getElementById('gender').value,
+                age: document.getElementById('age').value,
+                timestamp: new Date().toISOString()
+            };
+
+            // Validate all fields
+            if (!formData.name || !formData.cityMunicipality || !formData.barangay || !formData.sector || !formData.servicePurpose || !formData.gender || !formData.age) {
+                showMessage('Please fill in all required fields.', true);
+                return;
+            }
+
+            setLoading(true);
+            messageContainer.classList.add('hidden');
+
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // Google Apps Script requires no-cors
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                // With no-cors mode, we can't read the response, so we'll assume success
+                // The Google Script will handle the actual submission
+                showMessage('Registration successful! Thank you for checking in.', false);
+                form.reset();
+                
+                // Reset consent checkbox state
+                document.getElementById('consent').checked = false;
+
+            } catch (error) {
+                console.error('Error:', error);
+                showMessage('There was an error submitting your registration. Please try again.', true);
+            } finally {
+                setLoading(false);
+            }
+        });
+    </script>
+
+</body></html>
