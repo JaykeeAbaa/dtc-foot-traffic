@@ -12,6 +12,115 @@
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #e4e4e7; border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: #d4d4d8; }
+
+        /* Confirmation Page Animations */
+        @keyframes checkmark-draw {
+            0% {
+                stroke-dashoffset: 100;
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                stroke-dashoffset: 0;
+                opacity: 1;
+            }
+        }
+
+        @keyframes scale-in-bounce {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.15);
+            }
+            70% {
+                transform: scale(0.95);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse-ring {
+            0% {
+                transform: scale(0.8);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(1.4);
+                opacity: 0;
+            }
+        }
+
+        @keyframes fade-in-up {
+            0% {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fade-in {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .confirmation-icon {
+            position: relative;
+            animation: scale-in-bounce 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        .confirmation-icon::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: rgba(16, 185, 129, 0.2);
+            animation: pulse-ring 1.5s ease-out 0.3s forwards;
+        }
+
+        .confirmation-icon svg {
+            position: relative;
+            z-index: 1;
+        }
+
+        .confirmation-icon svg path {
+            stroke-dasharray: 100;
+            stroke-dashoffset: 100;
+            animation: checkmark-draw 0.9s ease-out 0.4s forwards;
+        }
+
+        .confirmation-title {
+            animation: fade-in-up 0.5s ease-out 0.4s both;
+        }
+
+        .confirmation-subtitle {
+            animation: fade-in-up 0.5s ease-out 0.5s both;
+        }
+
+        .confirmation-summary {
+            animation: fade-in-up 0.5s ease-out 0.6s both;
+        }
+
+        .confirmation-button {
+            animation: fade-in-up 0.5s ease-out 0.7s both;
+        }
     </style>
 </head>
 <body class="bg-zinc-50 text-zinc-900 antialiased selection:bg-blue-100 selection:text-blue-900 h-screen overflow-hidden flex flex-col">
@@ -27,9 +136,9 @@
                 </div>
             </div>
             <div class="flex items-center gap-4 text-zinc-400">
-                <button class="hover:text-zinc-600 transition-colors" title="Information">
+                <a href="https://www.facebook.com/DICTCaraga/" target="_blank" rel="noopener noreferrer" class="hover:text-zinc-600 transition-colors" title="Visit DICT Caraga Facebook Page">
                     <span class="iconify" data-icon="lucide:help-circle" data-width="20" data-stroke-width="1.5"></span>
-                </button>
+                </a>
             </div>
         </div>
     </header>
@@ -38,14 +147,16 @@
     <main class="flex-1 overflow-y-auto w-full">
         <div class="max-w-[480px] mx-auto py-6 px-6">
             
-            <!-- Form Header -->
-            <div class="mb-6">
-                <h2 class="text-2xl font-semibold tracking-tight text-zinc-900">DTC Foot Traffic</h2>
-                <p class="text-sm text-zinc-500 mt-1">Please fill in your details to enter the center.</p>
-            </div>
+            <!-- Form Section -->
+            <div id="formSection">
+                <!-- Form Header -->
+                <div class="mb-6">
+                    <h2 class="text-2xl font-semibold tracking-tight text-zinc-900">DTC Foot Traffic System</h2>
+                    <p class="text-sm text-zinc-500 mt-1">Please fill in your details to enter the center.</p>
+                </div>
 
-            <!-- Form -->
-            <form id="registrationForm" class="space-y-5">
+                <!-- Form -->
+                <form id="registrationForm" class="space-y-5">
                 
                 <!-- Name Field -->
                 <div>
@@ -113,10 +224,18 @@
                     <div class="relative">
                         <select id="sector" name="sector" required class="w-full pl-3 pr-8 py-2 text-sm bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 hover:border-zinc-300 transition-all appearance-none text-zinc-700 cursor-pointer">
                             <option value="">Select...</option>
-                            <option value="Citizen">Citizen</option>
+                            <option value="Out of School Youth & Adult">Out of School Youth & Adult</option>
+                            <option value="Educator">Educator</option>
+                            <option value="Student">Student</option>
+                            <option value="PWDs">PWD's</option>
+                            <option value="Women">Women</option>
+                            <option value="Senior Citizen">Senior Citizen</option>
+                            <option value="OFW">OFW</option>
+                            <option value="Entrepreneur">Entrepreneur</option>
+                            <option value="Indigenous People">Indigenous People</option>
+                            <option value="Farmers and Fisherfolks">Farmers and Fisherfolks</option>
                             <option value="Government Employee">Government Employee</option>
-                            <option value="Private Sector">Private Sector</option>
-                            <option value="Student / Academe">Student / Academe</option>
+                            <option value="Other">Other</option>
                         </select>
                         <span class="absolute right-3 top-2.5 text-zinc-400 pointer-events-none">
                             <span class="iconify" data-icon="lucide:chevron-down" data-width="16" data-stroke-width="1.5"></span>
@@ -127,18 +246,24 @@
                 <!-- Service/Purpose Field -->
                 <div>
                     <label class="block text-[11px] uppercase tracking-wider font-semibold text-zinc-500 mb-1.5">Service/Purpose</label>
-                    <div class="relative">
-                        <select id="servicePurpose" name="servicePurpose" required class="w-full pl-3 pr-8 py-2 text-sm bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 hover:border-zinc-300 transition-all appearance-none text-zinc-700 cursor-pointer">
-                            <option value="">Select...</option>
-                            <option value="Training">Training</option>
-                            <option value="Inquiry">Inquiry</option>
-                            <option value="Meeting">Meeting</option>
-                            <option value="Co-working">Co-working</option>
-                            <option value="Gov Application">Gov Application</option>
-                        </select>
-                        <span class="absolute right-3 top-2.5 text-zinc-400 pointer-events-none">
-                            <span class="iconify" data-icon="lucide:chevron-down" data-width="16" data-stroke-width="1.5"></span>
-                        </span>
+                    <div class="space-y-2">
+                        <div class="relative">
+                            <select id="servicePurpose" name="servicePurpose" required class="w-full pl-3 pr-8 py-2 text-sm bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 hover:border-zinc-300 transition-all appearance-none text-zinc-700 cursor-pointer">
+                                <option value="">Select...</option>
+                                <option value="Training">Training</option>
+                                <option value="Inquiry">Inquiry</option>
+                                <option value="Meeting">Meeting</option>
+                                <option value="Co-working">Co-working</option>
+                                <option value="Gov Application">Gov Application</option>
+                                <option value="Other">Other (please specify)</option>
+                            </select>
+                            <span class="absolute right-3 top-2.5 text-zinc-400 pointer-events-none">
+                                <span class="iconify" data-icon="lucide:chevron-down" data-width="16" data-stroke-width="1.5"></span>
+                            </span>
+                        </div>
+                        <div id="servicePurposeOtherWrapper" class="hidden">
+                            <input type="text" id="servicePurposeOther" name="servicePurposeOther" placeholder="Please specify other service/purpose" class="w-full px-3 py-2 text-sm bg-zinc-50 border border-dashed border-zinc-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 hover:border-zinc-300 transition-all placeholder:text-zinc-400">
+                        </div>
                     </div>
                 </div>
 
@@ -161,7 +286,7 @@
                 <!-- Submit Button -->
                 <div>
                     <button type="submit" id="submitBtn" class="group w-full bg-zinc-900 hover:bg-zinc-800 text-white font-medium py-2.5 text-sm rounded-lg shadow-lg shadow-zinc-900/10 flex items-center justify-center gap-2 transition-all active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed">
-                        <span id="submitText">Check In Now</span>
+                        <span id="submitText">Complete Registration</span>
                         <span id="submitIcon" class="group-hover:translate-x-1 transition-transform">
                             <span class="iconify" data-icon="lucide:arrow-right" data-width="18" data-stroke-width="1.5"></span>
                         </span>
@@ -171,7 +296,90 @@
                         Secure &amp; Encrypted Submission
                     </p>
                 </div>
-            </form>
+                </form>
+            </div>
+
+            <!-- Confirmation Page Section -->
+            <div id="confirmationSection" class="hidden">
+                <div class="text-center mb-6">
+                    <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-emerald-100 mb-4 confirmation-icon">
+                        <svg class="w-10 h-10 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl font-semibold tracking-tight text-zinc-900 mb-2 confirmation-title">Registration Successful!</h2>
+                    <p class="text-sm text-zinc-500 confirmation-subtitle">Thank you for checking in to the Digital Transformation Center.</p>
+                </div>
+
+                <!-- Submitted Information Summary -->
+                <div class="bg-zinc-50 border border-zinc-200 rounded-lg p-5 space-y-4 mb-6 confirmation-summary">
+                    <h3 class="text-xs uppercase tracking-wider font-semibold text-zinc-500 mb-3">Registration Details</h3>
+                    
+                    <div class="space-y-3">
+                        <div class="flex items-start gap-3">
+                            <span class="text-zinc-400 mt-0.5">
+                                <span class="iconify" data-icon="lucide:user" data-width="16" data-stroke-width="1.5"></span>
+                            </span>
+                            <div class="flex-1">
+                                <p class="text-[10px] uppercase tracking-wider font-semibold text-zinc-500">Name</p>
+                                <p class="text-sm text-zinc-900 mt-0.5" id="confirmName">-</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <span class="text-zinc-400 mt-0.5">
+                                <span class="iconify" data-icon="lucide:map-pin" data-width="16" data-stroke-width="1.5"></span>
+                            </span>
+                            <div class="flex-1">
+                                <p class="text-[10px] uppercase tracking-wider font-semibold text-zinc-500">Location</p>
+                                <p class="text-sm text-zinc-900 mt-0.5" id="confirmLocation">-</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <span class="text-zinc-400 mt-0.5">
+                                <span class="iconify" data-icon="lucide:building-2" data-width="16" data-stroke-width="1.5"></span>
+                            </span>
+                            <div class="flex-1">
+                                <p class="text-[10px] uppercase tracking-wider font-semibold text-zinc-500">Sector</p>
+                                <p class="text-sm text-zinc-900 mt-0.5" id="confirmSector">-</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <span class="text-zinc-400 mt-0.5">
+                                <span class="iconify" data-icon="lucide:briefcase" data-width="16" data-stroke-width="1.5"></span>
+                            </span>
+                            <div class="flex-1">
+                                <p class="text-[10px] uppercase tracking-wider font-semibold text-zinc-500">Service/Purpose</p>
+                                <p class="text-sm text-zinc-900 mt-0.5" id="confirmPurpose">-</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <span class="text-zinc-400 mt-0.5">
+                                <span class="iconify" data-icon="lucide:calendar" data-width="16" data-stroke-width="1.5"></span>
+                            </span>
+                            <div class="flex-1">
+                                <p class="text-[10px] uppercase tracking-wider font-semibold text-zinc-500">Date & Time</p>
+                                <p class="text-sm text-zinc-900 mt-0.5" id="confirmDateTime">-</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="space-y-3 confirmation-button">
+                    <button type="button" id="registerAnotherBtn" class="group w-full bg-zinc-900 hover:bg-zinc-800 text-white font-medium py-2.5 text-sm rounded-lg shadow-lg shadow-zinc-900/10 flex items-center justify-center gap-2 transition-all active:scale-[0.99]">
+                        <span class="iconify" data-icon="lucide:user-plus" data-width="18" data-stroke-width="1.5"></span>
+                        <span>Register Another Visitor</span>
+                    </button>
+                    <p class="text-center text-[10px] text-zinc-400 flex items-center justify-center gap-1">
+                        <span class="iconify" data-icon="lucide:shield-check" data-width="12" data-stroke-width="1.5"></span>
+                        Your information has been securely submitted
+                    </p>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -181,10 +389,20 @@
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxUwM9sr3Eccxl9V_5wV2JT9XU9-KGmVnxkRh5ZVQp8XaTC4YRKfFFkP6L7xmyaCos/exec';
 
         const form = document.getElementById('registrationForm');
+        const formSection = document.getElementById('formSection');
+        const confirmationSection = document.getElementById('confirmationSection');
         const submitBtn = document.getElementById('submitBtn');
         const submitText = document.getElementById('submitText');
         const submitIcon = document.getElementById('submitIcon');
         const messageContainer = document.getElementById('messageContainer');
+        const registerAnotherBtn = document.getElementById('registerAnotherBtn');
+
+        // Confirmation page elements
+        const confirmName = document.getElementById('confirmName');
+        const confirmLocation = document.getElementById('confirmLocation');
+        const confirmSector = document.getElementById('confirmSector');
+        const confirmPurpose = document.getElementById('confirmPurpose');
+        const confirmDateTime = document.getElementById('confirmDateTime');
 
         function showMessage(message, isError = false) {
             messageContainer.className = `p-4 rounded-lg ${isError ? 'bg-red-50 border border-red-200 text-red-700' : 'bg-emerald-50 border border-emerald-200 text-emerald-700'}`;
@@ -206,6 +424,81 @@
                 }, 5000);
             }
         }
+
+        function showConfirmationPage(formData) {
+            // Populate confirmation page with submitted data
+            confirmName.textContent = formData.name;
+            confirmLocation.textContent = `${formData.barangay}, ${formData.cityMunicipality}`;
+            confirmSector.textContent = formData.sector;
+            confirmPurpose.textContent = formData.servicePurpose;
+            
+            // Format date and time
+            const now = new Date();
+            const dateTime = now.toLocaleString('en-US', {
+                month: 'long',
+                day: 'numeric',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            confirmDateTime.textContent = dateTime;
+
+            // Hide form and show confirmation
+            formSection.classList.add('hidden');
+            confirmationSection.classList.remove('hidden');
+            
+            // Reset and trigger animations by forcing reflow
+            const icon = confirmationSection.querySelector('.confirmation-icon');
+            const title = confirmationSection.querySelector('.confirmation-title');
+            const subtitle = confirmationSection.querySelector('.confirmation-subtitle');
+            const summary = confirmationSection.querySelector('.confirmation-summary');
+            const button = confirmationSection.querySelector('.confirmation-button');
+            
+            // Remove and re-add animation classes to restart animations
+            [icon, title, subtitle, summary, button].forEach(el => {
+                if (el) {
+                    el.style.animation = 'none';
+                    void el.offsetHeight; // Trigger reflow
+                    el.style.animation = null;
+                }
+            });
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showForm() {
+            // Hide confirmation and show form
+            confirmationSection.classList.add('hidden');
+            formSection.classList.remove('hidden');
+            
+            // Reset form
+            form.reset();
+            document.getElementById('consent').checked = false;
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Register another visitor button handler
+        registerAnotherBtn.addEventListener('click', () => {
+            showForm();
+        });
+
+        // Handle service/purpose "Other" option
+        const servicePurposeSelect = document.getElementById('servicePurpose');
+        const servicePurposeOtherWrapper = document.getElementById('servicePurposeOtherWrapper');
+        const servicePurposeOtherInput = document.getElementById('servicePurposeOther');
+
+        servicePurposeSelect.addEventListener('change', () => {
+            if (servicePurposeSelect.value === 'Other') {
+                servicePurposeOtherWrapper.classList.remove('hidden');
+                servicePurposeOtherInput.focus();
+            } else {
+                servicePurposeOtherWrapper.classList.add('hidden');
+                servicePurposeOtherInput.value = '';
+            }
+        });
 
         function setLoading(isLoading) {
             submitBtn.disabled = isLoading;
@@ -235,19 +528,22 @@
             }
 
             // Collect form data
+            const selectedServicePurpose = document.getElementById('servicePurpose').value;
+            const servicePurposeOther = servicePurposeOtherInput.value.trim();
+
             const formData = {
                 name: document.getElementById('name').value.trim(),
                 cityMunicipality: document.getElementById('cityMunicipality').value.trim(),
                 barangay: document.getElementById('barangay').value.trim(),
                 sector: document.getElementById('sector').value,
-                servicePurpose: document.getElementById('servicePurpose').value,
+                servicePurpose: selectedServicePurpose === 'Other' ? servicePurposeOther : selectedServicePurpose,
                 gender: document.getElementById('gender').value,
                 age: document.getElementById('age').value,
                 timestamp: new Date().toISOString()
             };
 
             // Validate all fields
-            if (!formData.name || !formData.cityMunicipality || !formData.barangay || !formData.sector || !formData.servicePurpose || !formData.gender || !formData.age) {
+            if (!formData.name || !formData.cityMunicipality || !formData.barangay || !formData.sector || !selectedServicePurpose || !formData.gender || !formData.age || (selectedServicePurpose === 'Other' && !servicePurposeOther)) {
                 showMessage('Please fill in all required fields.', true);
                 return;
             }
@@ -267,11 +563,8 @@
 
                 // With no-cors mode, we can't read the response, so we'll assume success
                 // The Google Script will handle the actual submission
-                showMessage('Registration successful! Thank you for checking in.', false);
-                form.reset();
-                
-                // Reset consent checkbox state
-                document.getElementById('consent').checked = false;
+                // Show confirmation page instead of message
+                showConfirmationPage(formData);
 
             } catch (error) {
                 console.error('Error:', error);
