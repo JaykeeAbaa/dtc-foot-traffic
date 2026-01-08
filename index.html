@@ -121,6 +121,31 @@
         .confirmation-button {
             animation: fade-in-up 0.5s ease-out 0.7s both;
         }
+
+        /* Modal Animations */
+        @keyframes modal-backdrop-fade {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes modal-content-slide {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -48%) scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        .modal-backdrop {
+            animation: modal-backdrop-fade 0.2s ease-out;
+        }
+
+        .modal-content {
+            animation: modal-content-slide 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
     </style>
 </head>
 <body class="bg-zinc-50 text-zinc-900 antialiased selection:bg-blue-100 selection:text-blue-900 h-screen overflow-hidden flex flex-col">
@@ -276,7 +301,7 @@
                         </span>
                     </div>
                     <label for="consent" class="text-xs text-zinc-600 leading-relaxed cursor-pointer select-none">
-                        I consent to the processing of my personal data in accordance with the <span class="font-medium text-blue-700 hover:underline">Data Privacy Act of 2012</span> for contact tracing and analytics purposes.
+                        I consent to the processing of my personal data in accordance with the <button type="button" id="dataPrivacyBtn" class="font-medium text-blue-700 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500/20 rounded px-0.5">Data Privacy Act of 2012</button> for contact tracing and analytics purposes.
                     </label>
                 </div>
 
@@ -368,6 +393,22 @@
                     </div>
                 </div>
 
+                <!-- QR Code Section -->
+                <div class="bg-white border border-zinc-200 rounded-lg p-5 mb-6 confirmation-summary">
+                    <div class="flex items-center gap-5">
+                        <div class="flex-shrink-0">
+                            <img src="qr.png" alt="QR Code" class="w-32 h-32 object-contain">
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-sm font-semibold tracking-tight text-zinc-900 mb-2">DICT Clients Online Satisfaction Survey</h3>
+                            <a href="https://bit.ly/ARTA-Survey" target="_blank" rel="noopener noreferrer" class="text-xs text-blue-600 hover:text-blue-700 hover:underline break-all inline-flex items-center gap-1">
+                                <span>https://bit.ly/ARTA-Survey</span>
+                                <span class="iconify" data-icon="lucide:external-link" data-width="12" data-stroke-width="1.5"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Action Buttons -->
                 <div class="space-y-3 confirmation-button">
                     <button type="button" id="registerAnotherBtn" class="group w-full bg-zinc-900 hover:bg-zinc-800 text-white font-medium py-2.5 text-sm rounded-lg shadow-lg shadow-zinc-900/10 flex items-center justify-center gap-2 transition-all active:scale-[0.99]">
@@ -383,6 +424,109 @@
         </div>
     </main>
 
+    <!-- Data Privacy Modal -->
+    <div id="dataPrivacyModal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4">
+        <!-- Backdrop -->
+        <div class="modal-backdrop fixed inset-0 bg-black/50 backdrop-blur-sm" id="modalBackdrop"></div>
+        
+        <!-- Modal Content -->
+        <div class="modal-content relative bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col z-10">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between p-6 border-b border-zinc-200 shrink-0">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center">
+                        <span class="iconify" data-icon="lucide:shield-check" data-width="20" data-stroke-width="1.5" class="text-blue-600"></span>
+                    </div>
+                    <div>
+                        <h2 class="text-lg font-semibold text-zinc-900">Data Privacy Act of 2012</h2>
+                        <p class="text-xs text-zinc-500">Republic Act No. 10173</p>
+                    </div>
+                </div>
+                <button type="button" id="closeModalBtn" class="p-2 hover:bg-zinc-100 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500/20">
+                    <span class="iconify" data-icon="lucide:x" data-width="20" data-stroke-width="1.5" class="text-zinc-500"></span>
+                </button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="flex-1 overflow-y-auto p-6 space-y-5">
+                <div>
+                    <h3 class="text-sm font-semibold text-zinc-900 mb-2">Overview</h3>
+                    <p class="text-sm text-zinc-600 leading-relaxed">
+                        The Data Privacy Act of 2012 (Republic Act No. 10173) is a comprehensive law that protects the fundamental human right to privacy while ensuring the free flow of information for innovation, growth, and national development.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="text-sm font-semibold text-zinc-900 mb-2">Your Rights</h3>
+                    <ul class="space-y-2 text-sm text-zinc-600">
+                        <li class="flex items-start gap-2">
+                            <span class="iconify" data-icon="lucide:check-circle" data-width="16" data-stroke-width="1.5" class="text-blue-600 mt-0.5 flex-shrink-0"></span>
+                            <span><strong class="text-zinc-900">Right to be informed</strong> - You have the right to be informed whether personal data pertaining to you shall be, are being, or have been processed.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="iconify" data-icon="lucide:check-circle" data-width="16" data-stroke-width="1.5" class="text-blue-600 mt-0.5 flex-shrink-0"></span>
+                            <span><strong class="text-zinc-900">Right to access</strong> - You have the right to access your personal data and obtain a copy of your personal data.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="iconify" data-icon="lucide:check-circle" data-width="16" data-stroke-width="1.5" class="text-blue-600 mt-0.5 flex-shrink-0"></span>
+                            <span><strong class="text-zinc-900">Right to object</strong> - You have the right to object to the processing of your personal data.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="iconify" data-icon="lucide:check-circle" data-width="16" data-stroke-width="1.5" class="text-blue-600 mt-0.5 flex-shrink-0"></span>
+                            <span><strong class="text-zinc-900">Right to erasure or blocking</strong> - You have the right to suspend, withdraw, or order the blocking, removal, or destruction of your personal data.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="iconify" data-icon="lucide:check-circle" data-width="16" data-stroke-width="1.5" class="text-blue-600 mt-0.5 flex-shrink-0"></span>
+                            <span><strong class="text-zinc-900">Right to damages</strong> - You have the right to be indemnified for any damages sustained due to inaccurate, incomplete, outdated, false, unlawfully obtained, or unauthorized use of personal data.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="iconify" data-icon="lucide:check-circle" data-width="16" data-stroke-width="1.5" class="text-blue-600 mt-0.5 flex-shrink-0"></span>
+                            <span><strong class="text-zinc-900">Right to file a complaint</strong> - You have the right to file a complaint with the National Privacy Commission (NPC) for any violation of your data privacy rights.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-sm font-semibold text-zinc-900 mb-2">How We Use Your Data</h3>
+                    <p class="text-sm text-zinc-600 leading-relaxed mb-2">
+                        The Department of Information and Communications Technology (DICT) collects and processes your personal data for the following purposes:
+                    </p>
+                    <ul class="space-y-1.5 text-sm text-zinc-600 ml-4 list-disc">
+                        <li>Foot traffic analytics and center management</li>
+                        <li>Service improvement and program development</li>
+                        <li>Compliance with government reporting requirements</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-sm font-semibold text-zinc-900 mb-2">Data Security</h3>
+                    <p class="text-sm text-zinc-600 leading-relaxed">
+                        We implement appropriate technical and organizational measures to protect your personal data against unauthorized access, alteration, disclosure, or destruction. Your data is stored securely and accessed only by authorized personnel for legitimate purposes.
+                    </p>
+                </div>
+
+                <div class="bg-blue-50/50 border border-blue-100 rounded-lg p-4">
+                    <div class="flex items-start gap-3">
+                        <span class="iconify" data-icon="lucide:info" data-width="18" data-stroke-width="1.5" class="text-blue-600 mt-0.5 flex-shrink-0"></span>
+                        <div>
+                            <p class="text-xs font-medium text-blue-900 mb-1">For More Information</p>
+                            <p class="text-xs text-blue-700 leading-relaxed">
+                                If you have questions or concerns about how we handle your personal data, or if you wish to exercise your rights under the Data Privacy Act, please contact our Data Protection Officer or visit the <a href="https://www.privacy.gov.ph" target="_blank" rel="noopener noreferrer" class="underline hover:text-blue-800">National Privacy Commission</a> website.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="border-t border-zinc-200 p-4 shrink-0">
+                <button type="button" id="closeModalBtnFooter" class="w-full bg-zinc-900 hover:bg-zinc-800 text-white font-medium py-2.5 text-sm rounded-lg transition-all active:scale-[0.99] focus:outline-none focus:ring-2 focus:ring-blue-500/20">
+                    I Understand
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // IMPORTANT: Replace this URL with your Google Apps Script Web App URL
         // You'll get this URL after deploying your Google Apps Script (see instructions in Code.gs)
@@ -396,6 +540,13 @@
         const submitIcon = document.getElementById('submitIcon');
         const messageContainer = document.getElementById('messageContainer');
         const registerAnotherBtn = document.getElementById('registerAnotherBtn');
+
+        // Data Privacy Modal elements
+        const dataPrivacyModal = document.getElementById('dataPrivacyModal');
+        const dataPrivacyBtn = document.getElementById('dataPrivacyBtn');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const closeModalBtnFooter = document.getElementById('closeModalBtnFooter');
+        const modalBackdrop = document.getElementById('modalBackdrop');
 
         // Confirmation page elements
         const confirmName = document.getElementById('confirmName');
@@ -483,6 +634,34 @@
         // Register another visitor button handler
         registerAnotherBtn.addEventListener('click', () => {
             showForm();
+        });
+
+        // Data Privacy Modal handlers
+        function openDataPrivacyModal() {
+            dataPrivacyModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDataPrivacyModal() {
+            dataPrivacyModal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        dataPrivacyBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            openDataPrivacyModal();
+        });
+
+        closeModalBtn.addEventListener('click', closeDataPrivacyModal);
+        closeModalBtnFooter.addEventListener('click', closeDataPrivacyModal);
+        modalBackdrop.addEventListener('click', closeDataPrivacyModal);
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !dataPrivacyModal.classList.contains('hidden')) {
+                closeDataPrivacyModal();
+            }
         });
 
         // Handle service/purpose "Other" option
