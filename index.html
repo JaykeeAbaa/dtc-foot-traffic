@@ -128,23 +128,37 @@
             to { opacity: 1; }
         }
 
-        @keyframes modal-content-slide {
+        @keyframes modal-content-pop {
             from {
                 opacity: 0;
-                transform: translate(-50%, -48%) scale(0.96);
+                transform: scale(0.9) translateY(-10px);
             }
             to {
                 opacity: 1;
-                transform: translate(-50%, -50%) scale(1);
+                transform: scale(1) translateY(0);
             }
         }
 
         .modal-backdrop {
-            animation: modal-backdrop-fade 0.2s ease-out;
+            opacity: 0;
+            transition: opacity 0.3s ease-out;
+        }
+
+        .modal-backdrop.show {
+            opacity: 1;
+            animation: modal-backdrop-fade 0.3s ease-out;
         }
 
         .modal-content {
-            animation: modal-content-slide 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            opacity: 0;
+            transform: scale(0.9) translateY(-10px);
+            transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .modal-content.show {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            animation: modal-content-pop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
     </style>
 </head>
@@ -430,7 +444,7 @@
         <div class="modal-backdrop fixed inset-0 bg-black/50 backdrop-blur-sm" id="modalBackdrop"></div>
         
         <!-- Modal Content -->
-        <div class="modal-content relative bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col z-10">
+        <div class="modal-content relative bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col z-10" id="modalContent">
             <!-- Modal Header -->
             <div class="flex items-center justify-between p-6 border-b border-zinc-200 shrink-0">
                 <div class="flex items-center gap-3">
@@ -637,14 +651,31 @@
         });
 
         // Data Privacy Modal handlers
+        const modalContent = document.getElementById('modalContent');
+        
         function openDataPrivacyModal() {
             dataPrivacyModal.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
+            
+            // Force reflow to ensure smooth animation
+            void dataPrivacyModal.offsetHeight;
+            
+            // Trigger animations
+            requestAnimationFrame(() => {
+                modalBackdrop.classList.add('show');
+                modalContent.classList.add('show');
+            });
         }
 
         function closeDataPrivacyModal() {
-            dataPrivacyModal.classList.add('hidden');
-            document.body.style.overflow = '';
+            modalBackdrop.classList.remove('show');
+            modalContent.classList.remove('show');
+            
+            // Wait for animation to complete before hiding
+            setTimeout(() => {
+                dataPrivacyModal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }, 300);
         }
 
         dataPrivacyBtn.addEventListener('click', (e) => {
